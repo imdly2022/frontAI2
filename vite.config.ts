@@ -13,6 +13,11 @@ export default defineConfig({
     server: { entry: "server" },
   },
   nitro: {
-    preset: "vercel", // 或 "vercel-edge" 走 Edge Runtime
+    preset: "cloudflare_module",
+    compatibilityDate: "2025-01-01",
+    cloudflare: {
+      deployConfig: true,
+      nodeCompat: true,
+    },
   },
 });
