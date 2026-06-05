@@ -1,0 +1,1 @@
+INSERT INTO public.site_settings (key, value) VALUES ('newapi', jsonb_build_object('baseUrl', 'https://ai.x1x.pw', 'configured', true)) ON CONFLICT (key) DO UPDATE SET value = jsonb_build_object('baseUrl', 'https://ai.x1x.pw', 'configured', true), updated_at = now();

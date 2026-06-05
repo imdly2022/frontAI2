@@ -1,0 +1,2 @@
+ALTER TABLE public.models_catalog ADD COLUMN IF NOT EXISTS is_featured boolean NOT NULL DEFAULT false;
+CREATE INDEX IF NOT EXISTS idx_models_catalog_featured ON public.models_catalog (is_featured) WHERE is_featured = true;

@@ -1,0 +1,30 @@
+# Cloudflare Workers config — non-secret defaults.
+# nitro reads this and generates the final dist/server/wrangler.json at build time,
+# overriding `main` and `assets` paths. Deploy from dist/server/ after build:
+#
+#   bun run build
+#   bunx wrangler deploy --config dist/server/wrangler.json --cwd dist/server
+#
+# Set secrets via Dashboard or:
+#   bunx wrangler secret put SUPABASE_SERVICE_ROLE_KEY
+#   bunx wrangler secret put ZEPTOMAIL_API_KEY
+#   bunx wrangler secret put NEWAPI_ADMIN_TOKEN
+#   bunx wrangler secret put SESSION_SECRET
+#   bunx wrangler secret put LOVABLE_API_KEY
+
+name = "novarelay"
+main = "dist/server/server.js"
+compatibility_date = "2025-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+[observability]
+enabled = true
+
+[assets]
+directory = "dist/client"
+binding = "ASSETS"
+
+[vars]
+SUPABASE_URL = "https://cjialkvyrywquwfllmjh.supabase.co"
+SUPABASE_PUBLISHABLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJIUzI1NiIsInJlZiI6ImNqaWFsa3Z5cnl3cXV3ZmxsbWpoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk4NjYzNTMsImV4cCI6MjA5NTQ0MjM1M30.MoBkWSSw_tyutWh7a6jAsk0PmxrWhMfVTHnXPGb3q7U"
+NEWAPI_BASE_URL = "https://your-newapi-host.example.com"

@@ -1,0 +1,145 @@
+// ISO 3166-1 alpha-2 country list + blocked countries for registration.
+// Blocked list maintained here so admin/server share a single source of truth.
+
+export type Country = { code: string; name: string };
+
+// Common subset (covers ~95% of users). We list every blocked country here
+// too so the UI can still render the name when blocking.
+export const COUNTRIES: Country[] = [
+  { code: "US", name: "United States" },
+  { code: "GB", name: "United Kingdom" },
+  { code: "CA", name: "Canada" },
+  { code: "AU", name: "Australia" },
+  { code: "NZ", name: "New Zealand" },
+  { code: "DE", name: "Germany" },
+  { code: "FR", name: "France" },
+  { code: "IT", name: "Italy" },
+  { code: "ES", name: "Spain" },
+  { code: "PT", name: "Portugal" },
+  { code: "NL", name: "Netherlands" },
+  { code: "BE", name: "Belgium" },
+  { code: "LU", name: "Luxembourg" },
+  { code: "CH", name: "Switzerland" },
+  { code: "AT", name: "Austria" },
+  { code: "IE", name: "Ireland" },
+  { code: "SE", name: "Sweden" },
+  { code: "NO", name: "Norway" },
+  { code: "DK", name: "Denmark" },
+  { code: "FI", name: "Finland" },
+  { code: "IS", name: "Iceland" },
+  { code: "PL", name: "Poland" },
+  { code: "CZ", name: "Czechia" },
+  { code: "SK", name: "Slovakia" },
+  { code: "HU", name: "Hungary" },
+  { code: "RO", name: "Romania" },
+  { code: "BG", name: "Bulgaria" },
+  { code: "GR", name: "Greece" },
+  { code: "HR", name: "Croatia" },
+  { code: "SI", name: "Slovenia" },
+  { code: "EE", name: "Estonia" },
+  { code: "LV", name: "Latvia" },
+  { code: "LT", name: "Lithuania" },
+  { code: "RS", name: "Serbia" },
+  { code: "TR", name: "Türkiye" },
+  { code: "IL", name: "Israel" },
+  { code: "AE", name: "United Arab Emirates" },
+  { code: "SA", name: "Saudi Arabia" },
+  { code: "QA", name: "Qatar" },
+  { code: "KW", name: "Kuwait" },
+  { code: "BH", name: "Bahrain" },
+  { code: "OM", name: "Oman" },
+  { code: "JO", name: "Jordan" },
+  { code: "LB", name: "Lebanon" },
+  { code: "EG", name: "Egypt" },
+  { code: "MA", name: "Morocco" },
+  { code: "TN", name: "Tunisia" },
+  { code: "DZ", name: "Algeria" },
+  { code: "ZA", name: "South Africa" },
+  { code: "KE", name: "Kenya" },
+  { code: "NG", name: "Nigeria" },
+  { code: "GH", name: "Ghana" },
+  { code: "TZ", name: "Tanzania" },
+  { code: "UG", name: "Uganda" },
+  { code: "RW", name: "Rwanda" },
+  { code: "IN", name: "India" },
+  { code: "PK", name: "Pakistan" },
+  { code: "BD", name: "Bangladesh" },
+  { code: "LK", name: "Sri Lanka" },
+  { code: "NP", name: "Nepal" },
+  { code: "JP", name: "Japan" },
+  { code: "KR", name: "South Korea" },
+  { code: "HK", name: "Hong Kong" },
+  { code: "TW", name: "Taiwan" },
+  { code: "SG", name: "Singapore" },
+  { code: "MY", name: "Malaysia" },
+  { code: "TH", name: "Thailand" },
+  { code: "VN", name: "Vietnam" },
+  { code: "PH", name: "Philippines" },
+  { code: "ID", name: "Indonesia" },
+  { code: "KH", name: "Cambodia" },
+  { code: "LA", name: "Laos" },
+  { code: "MN", name: "Mongolia" },
+  { code: "KZ", name: "Kazakhstan" },
+  { code: "UZ", name: "Uzbekistan" },
+  { code: "AZ", name: "Azerbaijan" },
+  { code: "GE", name: "Georgia" },
+  { code: "AM", name: "Armenia" },
+  { code: "MX", name: "Mexico" },
+  { code: "BR", name: "Brazil" },
+  { code: "AR", name: "Argentina" },
+  { code: "CL", name: "Chile" },
+  { code: "CO", name: "Colombia" },
+  { code: "PE", name: "Peru" },
+  { code: "UY", name: "Uruguay" },
+  { code: "EC", name: "Ecuador" },
+  { code: "CR", name: "Costa Rica" },
+  { code: "PA", name: "Panama" },
+  { code: "DO", name: "Dominican Republic" },
+  { code: "GT", name: "Guatemala" },
+  { code: "HN", name: "Honduras" },
+  { code: "SV", name: "El Salvador" },
+  { code: "UA", name: "Ukraine" },
+  // — Blocked (listed so the name still resolves in admin/UI) —
+  { code: "CN", name: "China (mainland)" },
+  { code: "RU", name: "Russia" },
+  { code: "IR", name: "Iran" },
+  { code: "KP", name: "North Korea" },
+  { code: "SY", name: "Syria" },
+  { code: "AF", name: "Afghanistan" },
+  { code: "MM", name: "Myanmar" },
+  { code: "YE", name: "Yemen" },
+  { code: "CU", name: "Cuba" },
+  { code: "VE", name: "Venezuela" },
+  { code: "NI", name: "Nicaragua" },
+  { code: "BY", name: "Belarus" },
+  { code: "SD", name: "Sudan" },
+  { code: "SO", name: "Somalia" },
+  { code: "LY", name: "Libya" },
+  { code: "CF", name: "Central African Republic" },
+  { code: "CD", name: "DR Congo" },
+  { code: "ER", name: "Eritrea" },
+  { code: "ET", name: "Ethiopia" },
+  { code: "ML", name: "Mali" },
+];
+
+// Registration is blocked from these countries (ISO alpha-2, uppercase).
+// NOTE: Ukraine sanctioned regions (Crimea / Donetsk / Luhansk / Kherson /
+// Zaporizhzhia) can't be filtered at country granularity from IP alone —
+// document this in policy. Ukraine (UA) itself is NOT blocked here.
+export const BLOCKED_COUNTRIES: ReadonlySet<string> = new Set([
+  "CN", "RU", "IR", "KP", "SY", "AF", "MM", "YE",
+  "CU", "VE", "NI",
+  "BY",
+  "SD", "SO", "LY", "CF", "CD", "ER", "ET", "ML",
+]);
+
+export function isBlockedCountry(code: string | null | undefined): boolean {
+  if (!code) return false;
+  return BLOCKED_COUNTRIES.has(code.toUpperCase());
+}
+
+export function countryName(code: string | null | undefined): string {
+  if (!code) return "—";
+  const c = COUNTRIES.find((x) => x.code === code.toUpperCase());
+  return c?.name ?? code;
+}

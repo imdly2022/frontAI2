@@ -1,0 +1,1 @@
+ALTER TABLE public.affiliates ALTER COLUMN commission_rate SET DEFAULT 0.10;
